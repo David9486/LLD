@@ -1,23 +1,27 @@
 package TextOperations;
 
+import java.util.List;
+
 public interface TextFunctions {
 
     //write operations
 
-    void insert();
+    String insert(String newWord, List<String> words, int rowNumber, int columnNumber);
 
-    void delete();
+    void delete(String deleteWord,List<String> words,int rowNumber);
 
-    void deleteLine();
+    //void deleteCharacters();
 
-    void findAndReplace();
+    //void deleteLine();
+
+    //void findAndReplace();
 
     //read operations
 
-    void print();
+    void print(List<String> words);
 
-    void search();
+    boolean search(String SearchWord,List<String> words);
 
-    void wordCount();
+   int wordCount(String word,List<String> words);
 
 }
