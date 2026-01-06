@@ -1,9 +1,11 @@
 package TextOperations;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConsoleLevel implements TextFunctions{
+public class ConsoleLevel extends TextFormat implements TextFunctions{
 
 
 
@@ -130,6 +132,24 @@ public class ConsoleLevel implements TextFunctions{
             }
         }
         return count;
+
+    }
+
+    public static void main(String[] args) {
+
+        ConsoleLevel cl = new ConsoleLevel();
+
+        TextFormat tf = new ConsoleLevel();
+
+        List<String> words = new ArrayList<>();
+
+        words.add("Independence day, observed annually on 15 Augest, is a national holiday in India commemorating the nations Independence from british rule on 15 August 1947");
+
+        String word = "Independence day, observed annually on 15 Augest, is a national holiday in India commemorating the nations Independence from british rule on 15 August 1947";
+
+        words = tf.FormatedLine(word);
+
+        cl.
 
     }
 
