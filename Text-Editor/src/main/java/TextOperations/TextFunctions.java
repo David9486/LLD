@@ -10,11 +10,11 @@ public interface TextFunctions {
 
     void delete(String deleteWord,List<String> words,int rowNumber);
 
-    //void deleteCharacters();
+    void deleteInRange(List<String> words , int rowNumber, int start, int end);
 
-    //void deleteLine();
+    void deleteLine(List<String> words, int rowNumber);
 
-    //void findAndReplace();
+    void findAndReplace(String searchWord,List<String> words, int rowNumber ,String replaceWord);
 
     //read operations
 

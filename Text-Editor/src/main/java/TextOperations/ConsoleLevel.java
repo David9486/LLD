@@ -17,7 +17,7 @@ public class ConsoleLevel extends TextFormat implements TextFunctions{
 
     public String insert(String newWord,List<String> words, int rowNumber, int columnNumber){
 
-        for(int i=0;i< words.size();i++){
+        for(int i=0;i<words.size();i++){
 
             String lines=words.get(i);
 
@@ -45,35 +45,83 @@ public class ConsoleLevel extends TextFormat implements TextFunctions{
         
         StringBuilder tempBuild = new StringBuilder();
 
-        for(int i=0;i<words.size();i++){
+        String line = words.get(rowNumber-1);
 
-            if(rowNumber-1 == i){
+        String[] wordList = line.split("\\s+");
 
-                String[] word = words.get(i).split(" ");
+        for(String word : wordList){
 
-                for(int j=0;j<word.length;j++){
+            String cleanWord = word.replaceAll("[^a-zA-Z]","");
 
-                    if(word[i].equals(deleteWord)){
+            if(!cleanWord.equalsIgnoreCase(deleteWord)){
 
-                        word[i]="";      //removing words that matches.
-
-                    }
-
-                }
-
-                for(int n=0;n<word.length-1;n++){
-
-                    tempBuild.append(word[n]).append(" ");
-                                                             //loop for building the string back
-                }
-                tempBuild.append(word[word.length-1]);
+                tempBuild.append(word).append(" ");
 
             }
 
         }
+        words.set(rowNumber-1,tempBuild.toString());
 
-        words.remove(rowNumber);
-        words.add(rowNumber,tempBuild.toString());
+    }
+
+    @Override
+
+    public void deleteInRange(List<String> words , int rowNumber, int start, int end ){
+
+        StringBuilder tempBuild = new StringBuilder();
+
+        String line = words.get(rowNumber-1);
+
+        if((start>0 && start<end) && (end<=line.length())){
+
+
+
+            tempBuild.append(line,0,start).append(" ").append(line,0,end).append(" ");
+
+
+
+        }
+
+        words.set(rowNumber-1,tempBuild.toString());
+
+
+
+    }
+@Override
+    public void deleteLine(List<String> words, int rowNumber){
+
+        words.remove(rowNumber-1);
+
+    }
+
+    @Override
+
+    public void findAndReplace(String searchWord,List<String> words, int rowNumber ,String replaceWord){
+
+        StringBuilder tempBuild = new StringBuilder();
+
+        String line = words.get(rowNumber-1);
+
+        String[] wordList = line.split("\\s+");
+
+        for(String word : wordList){
+
+            String cleanWord = word.replaceAll("[^a-zA-Z]","");
+
+            if(!cleanWord.equalsIgnoreCase(searchWord)){
+
+                tempBuild.append(word).append(" ");
+
+            }
+            else{
+
+                tempBuild.append(replaceWord).append(" ");
+
+            }
+
+        }
+        words.set(rowNumber-1,tempBuild.toString());
+
 
     }
 
@@ -90,6 +138,8 @@ public class ConsoleLevel extends TextFormat implements TextFunctions{
         }
 
     }
+
+    @Override
 
     public boolean search(String searchWord,List<String> words){
 
@@ -111,6 +161,8 @@ public class ConsoleLevel extends TextFormat implements TextFunctions{
 
         return false;
     }
+
+    @Override
 
     public int wordCount(String newWord,List<String> words){
 
@@ -135,21 +187,33 @@ public class ConsoleLevel extends TextFormat implements TextFunctions{
 
     }
 
+    public boolean se
+
     public static void main(String[] args) {
 
-        ConsoleLevel cl = new ConsoleLevel();
+        TextFunctions tfu = new ConsoleLevel();
 
         TextFormat tf = new ConsoleLevel();
 
         List<String> words = new ArrayList<>();
 
-        words.add("Independence day, observed annually on 15 Augest, is a national holiday in India commemorating the nations Independence from british rule on 15 August 1947");
+        List<String> wd;
 
-        String word = "Independence day, observed annually on 15 Augest, is a national holiday in India commemorating the nations Independence from british rule on 15 August 1947";
+        words.add("Independence day, observed annually on 15 August, is a national holiday in India commemorating the nations Independence from british rule on 15 August 1947");
+
+        String word = "Independence day, observed annually on 15 August, is a national holiday in India commemorating the nations Independence from british rule on 15 August 1947";
 
         words = tf.FormatedLine(word);
 
-        cl.
+
+
+        //System.out.println(words);
+
+        //wd = tf.FormatedLine(tfu.insert("David",words,2,5));
+
+        tfu.findAndReplace("day",words,1,"david");
+
+        tfu.print(words);
 
     }
 

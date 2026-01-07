@@ -9,14 +9,14 @@ public abstract class TextFormat {
 
     private StringBuilder joinWords = new StringBuilder();
 
-    private List<String> newLines = new ArrayList<>();
+    private List<String> newLines;
 
     public  List<String> FormatedLine(String lines){
 
         String[] words = lines.split("\\s+");
 
 
-
+        newLines = new ArrayList<>();
 
 
             for(String str : words){
