@@ -9,21 +9,22 @@ public class ConsoleLevel extends TextFormat implements TextFunctions{
 
 
 
-    List<String> containsWord = new ArrayList<>();
 
-    private StringBuilder build = new StringBuilder();
+
+
 
     @Override
 
     public String insert(String newWord,List<String> words, int rowNumber, int columnNumber){
 
+        StringBuilder build = new StringBuilder();
         for(int i=0;i<words.size();i++){
 
             String lines=words.get(i);
 
             if(rowNumber-1==i) {
 
-                String formedWord = lines.substring(0, columnNumber) + newWord + lines.substring(columnNumber);
+                String formedWord = lines.substring(0, columnNumber) +" "+ newWord +" "+ lines.substring(columnNumber);
                 build.append(formedWord);
 
             }
@@ -70,13 +71,19 @@ public class ConsoleLevel extends TextFormat implements TextFunctions{
 
         StringBuilder tempBuild = new StringBuilder();
 
+        if (rowNumber < 1 || rowNumber > words.size()) {
+            return;
+        }
+
         String line = words.get(rowNumber-1);
 
-        if((start>0 && start<end) && (end<=line.length())){
+
+
+        if((start>=0 && start<end) && (end<=line.length())){
 
 
 
-            tempBuild.append(line,0,start).append(" ").append(line,0,end).append(" ");
+            tempBuild.append(line,0,start-1).append(" ").append(line,end,line.length()).append(" ");
 
 
 
@@ -108,16 +115,22 @@ public class ConsoleLevel extends TextFormat implements TextFunctions{
 
             String cleanWord = word.replaceAll("[^a-zA-Z]","");
 
-            if(!cleanWord.equalsIgnoreCase(searchWord)){
+            if(cleanWord.equalsIgnoreCase(searchWord)){
 
-                tempBuild.append(word).append(" ");
-
-            }
-            else{
 
                 tempBuild.append(replaceWord).append(" ");
 
             }
+            else{
+
+                tempBuild.append(word).append(" ");
+
+            }
+
+
+
+
+
 
         }
         words.set(rowNumber-1,tempBuild.toString());
@@ -139,28 +152,9 @@ public class ConsoleLevel extends TextFormat implements TextFunctions{
 
     }
 
-    @Override
-
-    public boolean search(String searchWord,List<String> words){
-
-        for(int i=0;i<words.size();i++) {
 
 
-            String[] word = words.get(i).split(" ");
 
-            for (int j = 0; j < word.length; j++) {
-
-                if (word[i].equals(searchWord)) {
-
-                    return true;
-
-                }
-
-            }
-        }
-
-        return false;
-    }
 
     @Override
 
@@ -171,11 +165,13 @@ public class ConsoleLevel extends TextFormat implements TextFunctions{
         for(int i=0;i<words.size();i++) {
 
 
-            String[] word = words.get(i).split(" ");
+            String[] word = words.get(i).split("\\s+");
 
             for (int j = 0; j < word.length; j++) {
 
-                if (word[i].equals(newWord)) {
+                String clearWord = word[i].replaceAll("[^a-zA-Z]","");
+
+                if (clearWord.equalsIgnoreCase(newWord)) {
 
                     count++;
 
@@ -187,7 +183,43 @@ public class ConsoleLevel extends TextFormat implements TextFunctions{
 
     }
 
-    public boolean se
+    @Override
+    public boolean search(String searchWord,List<String> wordList){
+
+        for(String word : wordList){
+
+            String[] tempWordList = word.split("\\s+");
+
+            for(int i=0;i< tempWordList.length;i++){
+
+                String cleanWord = tempWordList[i].replaceAll("[^a-zA-Z]","");
+
+                if(cleanWord.equalsIgnoreCase(searchWord)){
+
+                    return true;
+
+                }
+
+            }
+
+        }
+
+        return false;
+
+    }
+    public String listToString(List<String> wordList){
+
+        StringBuilder build = new StringBuilder();
+
+        for(String word : wordList){
+
+            build.append(word).append(" ");
+
+        }
+
+        return build.toString();
+
+    }
 
     public static void main(String[] args) {
 
@@ -209,11 +241,11 @@ public class ConsoleLevel extends TextFormat implements TextFunctions{
 
         //System.out.println(words);
 
-        //wd = tf.FormatedLine(tfu.insert("David",words,2,5));
+        wd = tf.FormatedLine(tfu.insert("Davi",words,2,5));
 
-        tfu.findAndReplace("day",words,1,"david");
 
-        tfu.print(words);
+
+        tfu.print(wd);
 
     }
 
