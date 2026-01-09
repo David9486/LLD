@@ -169,7 +169,7 @@ public class ConsoleLevel extends TextFormat implements TextFunctions{
 
             for (int j = 0; j < word.length; j++) {
 
-                String clearWord = word[i].replaceAll("[^a-zA-Z]","");
+                String clearWord = word[j].replaceAll("[^a-zA-Z]","");
 
                 if (clearWord.equalsIgnoreCase(newWord)) {
 

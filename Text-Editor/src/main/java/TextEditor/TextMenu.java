@@ -45,13 +45,16 @@ public class TextMenu extends TextFormat {
                 System.out.println("6.Find and Replace");
                 System.out.println("7.Print");
                 System.out.println("8.Word count");
+                System.out.println("9.Exit");
 
 
 
-                sc.nextLine();
+
 
                 System.out.println("Enter your choice:");
                 int choice = sc.nextInt();
+
+                sc.nextLine();
 
 
                 switch (choice) {
@@ -59,7 +62,6 @@ public class TextMenu extends TextFormat {
                     case 1: //insert
 
                         System.out.println("Enter the word to insert:");
-                        sc.nextLine();
                         String wordInsert = sc.nextLine();
                         System.out.println("Enter the row number:");
                         rowNumber = sc.nextInt();
@@ -99,7 +101,7 @@ public class TextMenu extends TextFormat {
                         System.out.println("Enter the word to delete");
                         String word = sc.nextLine();
 
-                        sc.nextLine();
+
                         System.out.println("Enter the row number:");
                         rowNumber = sc.nextInt();
                         console.delete(word, wordList, rowNumber);
@@ -142,8 +144,10 @@ public class TextMenu extends TextFormat {
 
                     case 6: //find and replace
 
+                        sc.nextLine();
+
                         System.out.println("Enter the word to search:");
-                        String searchWord = sc.next();
+                        String searchWord = sc.nextLine();
 
 
 
