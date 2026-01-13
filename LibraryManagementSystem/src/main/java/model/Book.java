@@ -9,6 +9,7 @@ public class Book {
     private String publisher;
     private String category;
 
+
     public Book(){
 
 
@@ -22,7 +23,10 @@ public class Book {
         this.numberOfPages = numberOfPages;
         this.publisher = publisher;
         this.category = category;
+
     }
+
+
 
     public int getBookId() {
         return bookId;

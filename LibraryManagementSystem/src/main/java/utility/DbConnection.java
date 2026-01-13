@@ -6,7 +6,10 @@ import java.sql.SQLException;
 
 public class DbConnection {
 
-    public static Connection getConnection(String userName,String passWord) throws SQLException {
+    private static final String userName="postgres";
+    private static final String passWord="root";
+
+    public static Connection getConnection() throws SQLException {
 
         try{
 
