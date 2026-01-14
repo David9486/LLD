@@ -13,7 +13,7 @@ public class DbConnection {
 
         try{
 
-            Class.forName("org.postgres.Driver");
+            Class.forName("org.postgresql.Driver");
 
         } catch (ClassNotFoundException e) {
 
@@ -21,7 +21,7 @@ public class DbConnection {
 
         }
 
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/libraryManagement",userName,passWord);
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/librarymanagement",userName,passWord);
 
     }
 

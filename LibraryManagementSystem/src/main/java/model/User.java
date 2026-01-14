@@ -5,14 +5,14 @@ public class User {
    private int userId;
    private String name;
    private int role;
-   private String isBlocked;
+   private boolean isBlocked;
 
    public User(){
 
 
    }
 
-    public User(int userId, String name, int role, String isBlocked) {
+    public User(int userId, String name, int role, boolean isBlocked) {
         this.userId = userId;
         this.name = name;
         this.role = role;
@@ -43,11 +43,11 @@ public class User {
         this.role = role;
     }
 
-    public String getIsBlocked() {
+    public boolean getIsBlocked() {
         return isBlocked;
     }
 
-    public void setIsBlocked(String isBlocked) {
+    public void setIsBlocked(boolean isBlocked) {
         this.isBlocked = isBlocked;
     }
 }
