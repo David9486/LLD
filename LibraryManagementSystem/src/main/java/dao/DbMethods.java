@@ -36,7 +36,7 @@ public class DbMethods implements HelperMethods {
 
     public boolean addUser(String userName,int role) throws SQLException{
 
-        String query = "INSERT INTO user(user_name,role) VALUES(?,?)";
+        String query = "INSERT INTO users(user_name,role) VALUES(?,?)";
         try(Connection connection = DbConnection.getConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(query)){
