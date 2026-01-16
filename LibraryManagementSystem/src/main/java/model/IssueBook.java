@@ -4,23 +4,43 @@ import java.util.Date;
 
 public class IssueBook {
 
+    private int issueId;
     private Date issueDate;
     private Date dueDate;
     private Date returnDate;
     private int fine;
+    private boolean isAvailable = true;
 
     public IssueBook(){
 
 
     }
 
-    public IssueBook(Date issueDate, Date dueDate, Date returnDate, int fine) {
+    public IssueBook(int issueId,Date issueDate, Date dueDate, Date returnDate, int fine,boolean isAvailable) {
 
+        this.issueId = issueId;
         this.issueDate = issueDate;
         this.dueDate = dueDate;
         this.returnDate = returnDate;
         this.fine = fine;
+        this.isAvailable = isAvailable;
 
+    }
+
+    public int getIssueId() {
+        return issueId;
+    }
+
+    public void setIssueId(int issueId) {
+        this.issueId = issueId;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     public Date getIssueDate() {

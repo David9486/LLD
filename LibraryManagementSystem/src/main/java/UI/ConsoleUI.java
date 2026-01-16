@@ -13,7 +13,7 @@ public class ConsoleUI extends DbMethods {
         try{
 
             //db.addBook("Programming in java","David",250,"Java docx","Technology");
-            db.addUser("Janet",0);
+            //db.addUser("Janet",0);
             System.out.println("data inserted into db!");
         }
         catch(Exception e){

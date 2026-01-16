@@ -4,8 +4,10 @@ import utility.DbConnection;
 import utility.HelperMethods;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class DbMethods implements HelperMethods {
 
@@ -43,6 +45,28 @@ public class DbMethods implements HelperMethods {
 
             preparedStatement.setString(1,userName);
             preparedStatement.setInt(2,role);
+
+            return preparedStatement.executeUpdate()>0;
+
+        }
+
+    }
+
+    //issue book
+
+
+    @Override
+    public boolean issueBook() throws SQLException{
+
+        LocalDate currentDate = LocalDate.now();
+        LocalDate dueDate = currentDate.plusDays(15);
+
+        String query = "INSERT INTO issuedbook(due_date) VALUES(?)";
+
+        try(Connection connection = DbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)){
+
+            preparedStatement.setDate(1, Date.valueOf(dueDate));
 
             return preparedStatement.executeUpdate()>0;
 

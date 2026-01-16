@@ -1,6 +1,7 @@
 package utility;
 
 import java.sql.SQLException;
+import java.util.Date;
 
 public interface HelperMethods {
 
@@ -13,6 +14,12 @@ boolean addBook(String book_name,String author_name,int number_Of_page,String pu
 //add a user
 
 boolean addUser(String userName,int role) throws SQLException;
+
+//issue book by admin
+    //due date should be around 15 days from the date of lending the book
+
+boolean issueBook() throws SQLException;
+
 
 
 }
