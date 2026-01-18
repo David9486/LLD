@@ -73,5 +73,5 @@ public class DbMethods implements HelperMethods {
         }
 
     }
-    public
+    public boolean
 }
