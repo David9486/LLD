@@ -61,12 +61,13 @@ public class DbMethods implements HelperMethods {
         LocalDate currentDate = LocalDate.now();
         LocalDate dueDate = currentDate.plusDays(15);
 
-        String query = "INSERT INTO issuedbook(due_date) VALUES(?)";
+        String query = "INSERT INTO issuedbook(issue_date,due_date) VALUES(?,?)";
 
         try(Connection connection = DbConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)){
 
-            preparedStatement.setDate(1, Date.valueOf(dueDate));
+            preparedStatement.setDate(1,Date.valueOf(currentDate));
+            preparedStatement.setDate(2, Date.valueOf(dueDate));
 
             return preparedStatement.executeUpdate()>0;
 
@@ -76,5 +77,17 @@ public class DbMethods implements HelperMethods {
 
     //return book
 
+    public boolean returnBook(){
 
+        LocalDate returnDate = LocalDate.now();
+
+
+    }
+
+
+    private int payFine(Date dueDate,Date returnDate){
+
+
+
+    }
 }
