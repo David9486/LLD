@@ -73,5 +73,8 @@ public class DbMethods implements HelperMethods {
         }
 
     }
-    public boolean
+
+    //return book
+
+
 }
