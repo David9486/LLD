@@ -12,7 +12,7 @@ public non-sealed class UserRepoImplementation implements UserRepository{
     @Override
     public boolean checkLogin(String userName, String password){
 
-        String query = "SELECT 1 FROM USER WHERE user_name=? AND password=?";
+        String query = "SELECT 1 FROM users WHERE user_name=? AND password=?";
 
         try(Connection connection = DbConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)

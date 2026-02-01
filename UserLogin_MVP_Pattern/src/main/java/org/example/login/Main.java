@@ -2,6 +2,8 @@ package org.example.login;
 
 import org.example.login.model.LoginModel;
 import org.example.login.presenter.LoginPresenter;
+import org.example.login.view.LoginView;
+import org.example.login.view.LoginViewImplementation;
 
 import java.util.Scanner;
 
@@ -10,15 +12,16 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
 
-        System.out.println("enter the user name:");
-        String userName = sc.nextLine();
 
-        System.out.println("enter the password:");
-        String passWord = sc.nextLine();
+        LoginViewImplementation loginView = new LoginViewImplementation();
 
-        LoginPresenter loginPresenter = new LoginPresenter(new LoginModel(user),);
+
+        LoginPresenter loginPresenter = new LoginPresenter(loginView);
+
+        loginView.setLoginPresenter(loginPresenter);
+
+        loginView.loginDetails();
 
     }
 }

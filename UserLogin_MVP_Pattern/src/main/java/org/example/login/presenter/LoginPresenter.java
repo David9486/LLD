@@ -10,7 +10,7 @@ public class LoginPresenter {
     private LoginView loginView;
     private LoginModel loginModel;
 
-    public LoginPresenter(LoginModel loginModel, LoginView loginView){
+    public LoginPresenter(LoginView loginView){
 
         this.loginView = loginView;
 
@@ -20,7 +20,7 @@ public class LoginPresenter {
 
     }
 
-    public void logic(String userName,String password){
+    public void login(String userName,String password){
 
         if(loginModel.validateLogin(userName,password)){
 
