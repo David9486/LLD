@@ -16,11 +16,6 @@ public class Main {
 
         LoginViewImplementation loginView = new LoginViewImplementation();
 
-
-        LoginPresenter loginPresenter = new LoginPresenter(loginView);
-
-        loginView.setLoginPresenter(loginPresenter);
-
         loginView.loginDetails();
 
     }

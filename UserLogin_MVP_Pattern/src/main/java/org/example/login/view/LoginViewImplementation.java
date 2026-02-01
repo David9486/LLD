@@ -6,11 +6,15 @@ import java.util.Scanner;
 
 public class LoginViewImplementation implements LoginView{
 
-    private LoginPresenter loginPresenter;
+    private final LoginPresenter loginPresenter;
 
-    public void setLoginPresenter(LoginPresenter loginPresenter) {
-        this.loginPresenter = loginPresenter;
+    public LoginViewImplementation(){
+
+        this.loginPresenter = new LoginPresenter(this);
+
     }
+
+
 
     public void loginDetails(){
 
