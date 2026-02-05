@@ -7,7 +7,10 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 
 public class DbMethods implements HelperMethods {
 
@@ -77,17 +80,47 @@ public class DbMethods implements HelperMethods {
 
     //return book
 
-    public boolean returnBook(){
+    public book returnBook(){
 
         LocalDate returnDate = LocalDate.now();
 
 
+
     }
 
-
+    //per day fine rs.20 after due date
     private int payFine(Date dueDate,Date returnDate){
 
+        int fine=0;
 
+        if(returnDate.before(dueDate) || returnDate.equals(dueDate)){
+
+            return fine;
+
+        }
+        else{
+
+            long days = ChronoUnit.DAYS.between(convertToLocalDate(returnDate),convertToLocalDate(dueDate));
+            fine = (int) days*20;
+
+        }
+
+        return fine;
 
     }
+
+    private LocalDate convertToLocalDate(Date date){
+
+        return date.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+
+    }
+
+    private void displayFine(int fine){
+
+        System.out.println("fine to be paid: "+fine);
+
+    }
+
 }
