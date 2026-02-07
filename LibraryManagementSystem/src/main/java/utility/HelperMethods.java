@@ -23,6 +23,6 @@ boolean issueBook() throws SQLException;
 //return book
     //calculate fine amount if any -> if return date exceeds due date then per day 20rs fine
 
-boolean returnBook() throws SQLException;
+boolean returnBook(int issueId) throws SQLException;
 
 }

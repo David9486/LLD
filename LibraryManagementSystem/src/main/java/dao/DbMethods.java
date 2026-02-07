@@ -80,9 +80,28 @@ public class DbMethods implements HelperMethods {
 
     //return book
 
-    public book returnBook(){
+    public boolean returnBook(int bookId,int userId,Date dueDate,Date returnDate,Date issueDate) throws SQLException{
 
-        LocalDate returnDate = LocalDate.now();
+        int fine=payFine(dueDate,returnDate);
+        String query = "INSERT INTO issuedbook(user_id,book_id,issue_date,due_date,return_date,fine) VALUES(?,?,?,?,?,?)";
+        if(fine>0){
+
+            displayFine(fine);
+
+        }
+        try(Connection connection = DbConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query) ){
+
+            preparedStatement.setInt(1,userId);
+            preparedStatement.setInt(2,bookId);
+            preparedStatement.setDate(3,issueDate);
+            preparedStatement.setDate(4,dueDate);
+            preparedStatement.setDate(5,returnDate);
+            preparedStatement.setInt(6,fine);
+
+            return preparedStatement.executeUpdate()>0;
+
+        }
 
 
 
