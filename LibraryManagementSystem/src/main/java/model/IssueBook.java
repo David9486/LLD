@@ -9,21 +9,21 @@ public class IssueBook {
     private Date dueDate;
     private Date returnDate;
     private int fine;
-    private boolean isAvailable = true;
+
 
     public IssueBook(){
 
 
     }
 
-    public IssueBook(int issueId,Date issueDate, Date dueDate, Date returnDate, int fine,boolean isAvailable) {
+    public IssueBook(int issueId,Date issueDate, Date dueDate, Date returnDate, int fine) {
 
         this.issueId = issueId;
         this.issueDate = issueDate;
         this.dueDate = dueDate;
         this.returnDate = returnDate;
         this.fine = fine;
-        this.isAvailable = isAvailable;
+
 
     }
 
@@ -35,13 +35,7 @@ public class IssueBook {
         this.issueId = issueId;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
-    }
 
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
 
     public Date getIssueDate() {
         return issueDate;

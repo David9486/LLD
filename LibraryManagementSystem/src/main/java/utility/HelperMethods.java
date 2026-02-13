@@ -22,12 +22,12 @@ boolean addUser(String userName,int role) throws SQLException;
 //issue book by admin
     //due date should be around 15 days from the date of lending the book
 
-boolean issueBook() throws SQLException;
+boolean issueBook(int bookId,int userId) throws SQLException;
 
 //return book
     //calculate fine amount if any -> if return date exceeds due date then per day 20rs fine
 
-boolean returnBook(int bookId, int userId, java.sql.Date dueDate, java.sql.Date returnDate, Date issuedate) throws SQLException;
+boolean returnBook(int bookId, int userId, java.sql.Date dueDate, java.sql.Date returnDate) throws SQLException;
 
 //to display list of books
 List<Book> showBooks() throws SQLException;
@@ -40,6 +40,10 @@ boolean searchBook(String bookName) throws SQLException;
 
 List<User> viewAllUser() throws SQLException;
 
+User searchUserById(int userId) throws SQLException;
 
+//to check if the user is blocked or not
+
+boolean
 
 }

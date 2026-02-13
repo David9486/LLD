@@ -61,12 +61,12 @@ public class DbMethods implements HelperMethods {
 
 
     @Override
-    public boolean issueBook() throws SQLException{
+    public boolean issueBook(int userId,int bookId) throws SQLException{
 
         LocalDate currentDate = LocalDate.now();
         LocalDate dueDate = currentDate.plusDays(15);
 
-        String query = "INSERT INTO issuedbook(issue_date,due_date) VALUES(?,?)";
+        String query = "INSERT INTO issuedbook(user_id,book_id,issue_date,due_date) VALUES(?,?,?,?)";
 
         try(Connection connection = DbConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)){
@@ -84,10 +84,10 @@ public class DbMethods implements HelperMethods {
 
     //return book
     @Override
-    public boolean returnBook(int bookId,int userId,Date dueDate,Date returnDate,Date issueDate) throws SQLException{
+    public boolean returnBook(int bookId,int userId,Date dueDate,Date returnDate) throws SQLException{
 
         int fine=payFine(dueDate,returnDate);
-        String query = "INSERT INTO issuedbook(user_id,book_id,issue_date,due_date,return_date,fine) VALUES(?,?,?,?,?,?)";
+        String query = "UPDATE issuedbook SET return_date=?,fine=? WHERE user_id=? AND book_id=? AND return_date=NULL";
         if(fine>0){
 
             displayFine(fine);
@@ -96,12 +96,10 @@ public class DbMethods implements HelperMethods {
         try(Connection connection = DbConnection.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(query) ){
 
-            preparedStatement.setInt(1,userId);
-            preparedStatement.setInt(2,bookId);
-            preparedStatement.setDate(3,issueDate);
-            preparedStatement.setDate(4,dueDate);
-            preparedStatement.setDate(5,returnDate);
-            preparedStatement.setInt(6,fine);
+            preparedStatement.setDate(1,returnDate);
+            preparedStatement.setInt(2,fine);
+            preparedStatement.setInt(3,userId);
+            preparedStatement.setInt(4,bookId);
 
             return preparedStatement.executeUpdate()>0;
 
@@ -228,5 +226,38 @@ public class DbMethods implements HelperMethods {
         }
         return list;
     }
+
+    //find user by user id  admin level
+
+
+    @Override
+    public User searchUserById(int userId) throws SQLException {
+
+        String query = "SELECT * FROM users WHERE user_id=?";
+        this.user = new User();
+        try(Connection connection = DbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)){
+
+            preparedStatement.setInt(1,userId);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if(rs.next()){
+
+
+                this.user.setUserId(rs.getInt("user_id"));
+                this.user.setName(rs.getString("user_name"));
+                this.user.setRole(rs.getInt("role"));
+                this.user.setIsBlocked(rs.getBoolean("is_blocked"));
+
+            }
+
+        }
+
+        return user;
+
+    }
+
+    //
 
 }
