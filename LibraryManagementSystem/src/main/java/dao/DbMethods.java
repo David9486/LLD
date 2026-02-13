@@ -258,6 +258,21 @@ public class DbMethods implements HelperMethods {
 
     }
 
-    //
+    //to view a user is blocked or not
 
+
+    @Override
+    public boolean userAvailable(int userId) throws SQLException {
+
+        String query = "SELECT * FROM users WHERE is_blocked=false AND user_id=?";
+
+        try (Connection connection = DbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, userId);
+
+            return preparedStatement.executeUpdate() > 0;
+
+        }
+    }
 }

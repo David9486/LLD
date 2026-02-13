@@ -44,6 +44,8 @@ User searchUserById(int userId) throws SQLException;
 
 //to check if the user is blocked or not
 
-boolean
+boolean userAvailable(int userId) throws SQLException;
+
+
 
 }
