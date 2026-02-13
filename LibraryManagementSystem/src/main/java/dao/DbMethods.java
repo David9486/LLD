@@ -1,21 +1,21 @@
 package dao;
 
+import model.Book;
 import utility.DbConnection;
 import utility.HelperMethods;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DbMethods implements HelperMethods {
 
 
-
+ private Book book;
 
 
 
@@ -78,8 +78,10 @@ public class DbMethods implements HelperMethods {
 
     }
 
-    //return book
 
+
+    //return book
+    @Override
     public boolean returnBook(int bookId,int userId,Date dueDate,Date returnDate,Date issueDate) throws SQLException{
 
         int fine=payFine(dueDate,returnDate);
@@ -142,4 +144,37 @@ public class DbMethods implements HelperMethods {
 
     }
 
+    //method to display the books which are available.
+
+
+    @Override
+    public List<Book> showBooks() throws SQLException{
+
+        String query = "SELECT * FROM book";
+        List<Book> list = new ArrayList<>();
+
+
+
+        try(Connection connection = DbConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query)){
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while(rs.next()){
+
+                this.book = new Book();
+
+                this.book.setBookId(rs.getInt("book_id"));
+                this.book.setBookName(rs.getString("book_name"));
+                this.book.setAuthorName(rs.getString("author_name"));
+                this.book.setNumberOfPages(rs.getInt("number_of_pages"));
+                this.book.setPublisher(rs.getString("publisher"));
+                this.book.setCategory(rs.getString("category"));
+                list.add(book);
+
+            }
+
+        }
+        return list;
+    }
 }
