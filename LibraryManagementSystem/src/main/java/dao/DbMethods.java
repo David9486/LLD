@@ -1,6 +1,7 @@
 package dao;
 
 import model.Book;
+import model.User;
 import utility.DbConnection;
 import utility.HelperMethods;
 
@@ -16,6 +17,7 @@ public class DbMethods implements HelperMethods {
 
 
  private Book book;
+ private User user;
 
 
 
@@ -177,4 +179,54 @@ public class DbMethods implements HelperMethods {
         }
         return list;
     }
+
+    //to search for a book
+
+
+    @Override
+    public boolean searchBook(String bookName) throws SQLException {
+
+        String query = "SELECT book_name FROM book WHERE book_name=?";
+
+        try(Connection connection = DbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1,bookName);
+
+            return preparedStatement.executeUpdate()>0;
+        }
+
+
+
+    }
+
+    //to view all users
+    @Override
+    public List<User> viewAllUser() throws SQLException{
+
+        String query = "SELECT * FROM users";
+        List<User> list = new ArrayList<>();
+
+        try(Connection connection = DbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)){
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while(rs.next()){
+
+                this.user = new User();
+
+                this.user.setUserId(rs.getInt("user_id"));
+                this.user.setName(rs.getString("user_name"));
+                this.user.setRole(rs.getInt("role"));
+                this.user.setIsBlocked(rs.getBoolean("is_blocked"));
+
+                list.add(user);
+
+            }
+
+        }
+        return list;
+    }
+
 }

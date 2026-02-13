@@ -1,6 +1,7 @@
 package utility;
 
 import model.Book;
+import model.User;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -28,7 +29,16 @@ boolean issueBook() throws SQLException;
 
 boolean returnBook(int bookId, int userId, java.sql.Date dueDate, java.sql.Date returnDate, Date issuedate) throws SQLException;
 
+//to display list of books
 List<Book> showBooks() throws SQLException;
+
+//to search for a book by title or author
+
+boolean searchBook(String bookName) throws SQLException;
+
+//to view all users only for admin access level
+
+List<User> viewAllUser() throws SQLException;
 
 
 
