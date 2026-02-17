@@ -275,4 +275,16 @@ public class DbMethods implements HelperMethods {
 
         }
     }
+
+    public void displayAdminMenu(){
+
+        System.out.println("====ADMIN MENU====");
+        System.out.println("1.Register");
+        System.out.println("2.Issue Book To User");
+        System.out.println("3.View All Users");
+        System.out.println("4.View All Books");
+        System.out.println("5.Search User By User Id");
+        System.out.println("6.Search A Book");
+
+    }
 }
